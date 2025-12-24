@@ -16,10 +16,13 @@
   },
   "files": [
     "dist",
+    "src",
+    "tsconfig.json",
     "README.md"
   ],
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "dev": "tsx src/cli.ts",
     "test": "node --test --experimental-strip-types src/**/*.test.ts",
     "prepublishOnly": "npm run build"
