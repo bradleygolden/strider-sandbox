@@ -1,0 +1,52 @@
+{
+  "name": "strider-sandbox",
+  "version": "0.1.0",
+  "description": "TypeScript runtime for Strider sandbox containers with NDJSON streaming protocol",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "strider-sandbox": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "test": "node --test --experimental-strip-types src/**/*.test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "strider",
+    "sandbox",
+    "agent",
+    "ndjson",
+    "streaming"
+  ],
+  "author": "Bradley Golden",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bradleygolden/strider-sandbox.git"
+  },
+  "homepage": "https://github.com/bradleygolden/strider-sandbox#readme",
+  "bugs": {
+    "url": "https://github.com/bradleygolden/strider-sandbox/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
