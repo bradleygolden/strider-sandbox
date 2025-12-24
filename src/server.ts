@@ -153,7 +153,11 @@ export function createServer(options: CreateServerOptions): Server {
             if (url === "/health" && method === "GET") {
               const healthData = options.onHealthCheck
                 ? await options.onHealthCheck()
-                : { status: "ok" };
+                : {
+                    status: "ok",
+                    sandbox_id: process.env.SANDBOX_ID ?? null,
+                    timestamp: new Date().toISOString(),
+                  };
 
               res.writeHead(200, { "Content-Type": "application/json" });
               res.end(JSON.stringify(healthData));
