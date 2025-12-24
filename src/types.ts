@@ -1,4 +1,37 @@
 /**
+ * Content block types for multi-modal prompts.
+ */
+
+/**
+ * Text content block.
+ */
+export interface TextBlock {
+  type: "text";
+  text: string;
+}
+
+/**
+ * File content block for images, PDFs, and other files.
+ * Use `data` for binary content (base64) or `text` for text-based formats.
+ */
+export interface FileBlock {
+  type: "file";
+  media_type: string;
+  data?: string;
+  text?: string;
+}
+
+/**
+ * Union type of all content blocks.
+ */
+export type ContentBlock = TextBlock | FileBlock;
+
+/**
+ * Prompt content - either a string or array of content blocks.
+ */
+export type PromptContent = string | ContentBlock[];
+
+/**
  * Event types for NDJSON streaming protocol.
  */
 export type EventType = "text_chunk" | "tool_start" | "tool_done" | "error" | "done";
@@ -90,7 +123,7 @@ export interface EventEmitter {
  * Prompt handler function signature.
  */
 export type PromptHandler = (
-  prompt: string,
+  prompt: PromptContent,
   emit: EventEmitter,
   options: Record<string, unknown>
 ) => Promise<void>;

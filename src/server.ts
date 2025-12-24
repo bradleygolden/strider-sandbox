@@ -17,10 +17,11 @@ import type {
   ServerOptions,
   Server,
   AgentEvent,
+  PromptContent,
 } from "./types.js";
 
 interface PromptRequest {
-  prompt: string;
+  prompt: PromptContent;
   options?: Record<string, unknown>;
 }
 
@@ -163,7 +164,11 @@ export function createServer(options: CreateServerOptions): Server {
               const body = await parseBody(req);
               const { prompt, options: promptOptions = {} } = body;
 
-              if (!prompt || typeof prompt !== "string") {
+              const isValidPrompt =
+                typeof prompt === "string" ||
+                (Array.isArray(prompt) && prompt.length > 0);
+
+              if (!prompt || !isValidPrompt) {
                 res.writeHead(400, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Missing or invalid 'prompt' field" }));
                 return;

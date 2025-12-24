@@ -22,6 +22,10 @@
 
 // Re-export types
 export type {
+  TextBlock,
+  FileBlock,
+  ContentBlock,
+  PromptContent,
   EventType,
   TextChunkEvent,
   ToolStartEvent,

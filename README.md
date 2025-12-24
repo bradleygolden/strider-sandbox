@@ -91,13 +91,46 @@ Returns health status.
 
 Accepts a prompt and streams NDJSON events.
 
-**Request:**
+**String prompt:**
 ```json
 {
   "prompt": "Hello, world!",
   "options": {}
 }
 ```
+
+**Content blocks (for images, PDFs, etc.):**
+```json
+{
+  "prompt": [
+    {"type": "text", "text": "What's in this image?"},
+    {"type": "file", "media_type": "image/png", "data": "<base64>"}
+  ]
+}
+```
+
+```json
+{
+  "prompt": [
+    {"type": "text", "text": "Summarize this document"},
+    {"type": "file", "media_type": "application/pdf", "data": "<base64>"}
+  ]
+}
+```
+
+```json
+{
+  "prompt": [
+    {"type": "text", "text": "Review this code"},
+    {"type": "file", "media_type": "text/markdown", "text": "# README\n..."}
+  ]
+}
+```
+
+Supported media types:
+- Images: `image/png`, `image/jpeg`, `image/gif`, `image/webp`
+- Documents: `application/pdf`
+- Text: `text/plain`, `text/markdown`, `text/html`, `text/csv`
 
 **Response:** NDJSON stream of events:
 
