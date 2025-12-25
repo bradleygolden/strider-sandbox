@@ -117,6 +117,11 @@ export interface EventEmitter {
    * Emit a done event.
    */
   done(result?: string): void;
+
+  /**
+   * Emit a custom event (any JSON-serializable object with a type field).
+   */
+  custom(event: Record<string, unknown>): void;
 }
 
 /**

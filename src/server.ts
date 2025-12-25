@@ -35,7 +35,7 @@ function log(message: string, debug: boolean): void {
  * Creates an NDJSON event emitter that writes to an HTTP response.
  */
 function createEmitter(res: http.ServerResponse): EventEmitter {
-  const write = (event: AgentEvent): void => {
+  const write = (event: AgentEvent | Record<string, unknown>): void => {
     const line = JSON.stringify(event) + "\n";
     res.write(line);
   };
@@ -59,6 +59,10 @@ function createEmitter(res: http.ServerResponse): EventEmitter {
 
     done(result?: string): void {
       write({ type: "done", result });
+    },
+
+    custom(event: Record<string, unknown>): void {
+      write(event);
     },
   };
 }
